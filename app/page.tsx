@@ -42,7 +42,10 @@ return(
         <div style={{fontSize:12,color:'#777',marginTop:4}}>{p.desc}</div>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:16}}>
           <div><span style={{fontWeight:900,fontSize:18,color:'#D4AF37'}}>{p.price} ر.س</span> <span style={{fontSize:12,color:'#555',textDecoration:'line-through',marginRight:6}}>{p.old}</span></div>
-          <button style={{background:'#D4AF37',color:'#000',border:0,padding:'8px 16px',borderRadius:12,fontWeight:800,fontSize:13,cursor:'pointer'}}>شراء الآن</button>
+          <button onClick={async()=>{
+  const r = await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:p.price,product:p.name})});
+  const d = await r.json(); window.location.href=d.url
+}} style={{background:'#D4AF37',color:'#000',border:0,padding:'8px 16px',borderRadius:12,fontWeight:800,fontSize:13,cursor:'pointer'}}>شراء الآن</button>
         </div>
       </div>
     ))}
