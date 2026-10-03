@@ -10,7 +10,7 @@ function SuccessContent(){
  const product = params.get('product') || 'حزمة CEO'
 
  // حط هنا رابط ملفاتك في Google Drive
- const DRIVE_LINK = "https://drive.google.com/drive/folders/1PUT-YOUR-FOLDER-ID-HERE"
+ const DRIVE_LINK = "https://drive.google.com/drive/folders/1https://drive.google.com/drive/folders/1iyo_1gS593ge8_3o9Ns3zRgwxbb_MbTz
 
  // رسالة للعميل
  const customerMsg = `هلا ${name} 🌹%0A%0Aشكراً لشرائك ${product} من متجر ألتيما%0A%0A⬇️ رابط التحميل المباشر:%0A${DRIVE_LINK}%0A%0A📧 تم الإرسال أيضاً على إيميلك: ${email}%0A%0Aأي مساعدة في التعديل على القالب تواصل معي مباشرة:%0A0502836333%0A%0Aبالتوفيق! محمد - ألتيما`
