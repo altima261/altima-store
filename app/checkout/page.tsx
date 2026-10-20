@@ -33,4 +33,4 @@ export default function Checkout(){
   </div>
  </div>
  )
-}
+}fetch('https://sahariosvercelfixedstatic100.vercel.app/api/webhook', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({product:'Hoodie', amount:149, city:'Jeddah'})})
