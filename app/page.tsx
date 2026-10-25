@@ -1,96 +1,52 @@
-'use client';
-// Owner: Mohammed Bin Ashwan - @altima261 - ashwan241@gmail.com
-// Tech: Next.js 14 + Tailwind CSS + Tap Payments
-// Fixed: Added 'use client' for useState - SAHARI OS v4.5 Integrated
+'use client'
+import { useState } from 'react'
 
-import { useState } from 'react';
-
-export default function Page() {
-  const [cart, setCart] = useState(0);
-  const [products] = useState([
-    { id: 1, name: 'Hoodie Altima - 199 SAR', price: 199, image: 'Hoodie' },
-    { id: 2, name: 'CEO - 99 SAR', price: 99, image: 'CEO' },
-    { id: 3, name: 'CMD - 99 SAR', price: 99, image: 'CMD' },
-  ]);
-
-  const addToCart = (product: any) => {
-    setCart(cart + 1);
-    // SAHARI OS v4.5 - Trigger on add to cart
-    fetch('https://sahariosvercelfixedstatic100.vercel.app/api/webhook', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        order_id: `CART_${Date.now()}`,
-        product: product.name,
-        customer: 'Cart Action',
-        amount: product.price,
-        city: 'Jeddah',
-        action: 'ADD_TO_CART',
-        store: 'altima-store.vercel.app'
-      })
-    }).catch(() => {});
-  };
+export default function Home() {
+  const [email, setEmail] = useState('')
 
   return (
     <div dir="rtl" style={{ minHeight: '100vh', background: '#08080a', color: '#fff', fontFamily: 'system-ui', padding: 20 }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: 1000, margin: '0 auto 20px', padding: '12px 20px', background: '#111114', borderRadius: 24, border: '1px solid #222' }}>
         <div>
           <h1 style={{ fontSize: 20, fontWeight: 900 }}>ALTIMA STORE</h1>
-          <p style={{ fontSize: 11, color: '#888' }}>مربوط بـ SAHARI OS v4.5 - محمد - جدة</p>
+          <p style={{ fontSize: 11, color: '#aaa' }}>قوالب سيرة ذاتية احترافية - وثيقة FL-371212741</p>
         </div>
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <span style={{ background: '#000', color: '#00F5FF', padding: '6px 12px', borderRadius: 999, fontSize: 12 }}>🛒 {cart}</span>
-          <a href="/checkout" style={{ background: '#D44F37', color: '#fff', padding: '8px 16px', borderRadius: 999, textDecoration: 'none', fontSize: 12, fontWeight: 900 }}>الشراء</a>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <a href="/checkout" style={{ background: '#fff', color: '#000', padding: '8px 16px', borderRadius: 20, fontSize: 12, fontWeight: 'bold', textDecoration: 'none' }}>المتجر</a>
         </div>
       </header>
 
-      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-        <div style={{ background: 'linear-gradient(90deg, #00F5FF, #7C3AED)', color: '#000', padding: 12, borderRadius: 12, marginBottom: 16, fontSize: 12, fontWeight: 900, textAlign: 'center' }}>
-          ✅ SAHARI OS v4.5 Super Agents - 163 خدمة + 26 اختراق + 7 أدوات - Clean Legal - No CS35
+      <main style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center', padding: '60px 20px' }}>
+        <h2 style={{ fontSize: 48, fontWeight: 900, lineHeight: 1.1, marginBottom: 20 }}>
+          سيرتك الذاتية<br/>
+          <span style={{ color: '#00F5FF' }}>بلمسة ALTIMA</span>
+        </h2>
+        <p style={{ fontSize: 14, color: '#aaa', maxWidth: 600, margin: '0 auto 30px', lineHeight: 1.8 }}>
+          حزمة ALTIMA التنفيذية - 10 قوالب احترافية جاهزة بصيغة Word و PDF
+          <br/>معتمدة من HR ومتوافقة مع أنظمة ATS
+        </p>
+        
+        <div style={{ marginTop: 20, display: 'flex', gap: 15, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href="/checkout" style={{ background: '#00F5FF', color: '#000', padding: '14px 28px', borderRadius: 30, fontWeight: 900, textDecoration: 'none' }}>اطلب الآن - 199 ريال</a>
+          <a href="https://sahariosvercelfixedst" style={{ border: '1px solid #333', color: '#fff', padding: '14px 28px', borderRadius: 30, textDecoration: 'none' }}>معاينة القوالب</a>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
-          {products.map((p) => (
-            <div key={p.id} style={{ background: '#111114', border: '1px solid #222', borderRadius: 24, padding: 20, textAlign: 'center' }}>
-              <div style={{ height: 120, background: '#1a1a1a', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, fontWeight: 900, marginBottom: 12 }}>{p.image}</div>
-              <h3 style={{ fontSize: 16, fontWeight: 900, marginBottom: 6 }}>{p.name}</h3>
-              <p style={{ color: '#888', fontSize: 12, marginBottom: 12 }}>جودة عالية - شحن لجدة والرياض ومكة</p>
-              <button onClick={() => addToCart(p)} style={{ width: '100%', height: 44, borderRadius: 999, background: '#00F5FF', color: '#000', fontWeight: 900, border: 'none', cursor: 'pointer' }}>
-                أضف للسلة - {p.price} SAR
-              </button>
-              <div style={{ fontSize: 10, color: '#555', marginTop: 8 }}>
-                SAHARI: agentic inbox + claude-ads + toprank + hyperframes
-              </div>
-            </div>
-          ))}
+        <div style={{ marginTop: 40, fontSize: 12, color: '#666' }}>
+          <p>✅ دفع آمن عبر Tap و Paylink | ✅ تسليم فوري | ✅ ضمان استرداد</p>
         </div>
+      </main>
 
-        <div style={{ marginTop: 20, background: '#111114', border: '1px solid #00F5FF33', borderRadius: 16, padding: 16 }}>
-          <h3 style={{ color: '#00F5FF', fontSize: 14, marginBottom: 8 }}>🔗 SAHARI OS Integration Status</h3>
-          <div style={{ fontSize: 11, color: '#aaa', lineHeight: '18px' }}>
-            ✅ app/page.tsx - Fixed with 'use client'<br />
-            ✅ app/checkout/page.tsx - Fixed with SAHARI webhook<br />
-            ✅ api/webhook - SAHARI OS v4.5 - Ready<br />
-            ✅ 7 Golden Tools: claude-ads, toprank, hyperframes, clawrouter, camofox, open-higgsfield, agentic inbox<br />
-            ✅ 6 Subagents: rea-explorer, ads-optimizer, content-factory, etc.<br />
-            ✅ Clean Legal - No CS35 - No Kronos - MIT/Apache
-          </div>
-          <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
-            <a href="/checkout" style={{ background: '#D44F37', color: '#fff', padding: '8px 16px', borderRadius: 999, textDecoration: 'none', fontSize: 12 }}>جرب الشراء</a>
-            <a href="https://sahariosvercelfixedstatic100.vercel.app" target="_blank" style={{ background: '#111', color: '#00F5FF', padding: '8px 16px', borderRadius: 999, textDecoration: 'none', fontSize: 12, border: '1px solid #00F5FF33' }}>افتح SAHARI OS</a>
-          </div>
-        </{/* روابط السياسات - مطلوب من Tap و Paylink */}
-<div style={{ marginTop: 40, borderTop: '1px solid #eee', padding: '30px 20px', textAlign: 'center', background: '#fafafa' }}>
-  <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', fontSize: 14 }}>
-    <a href="/terms" style={{ color: '#666', textDecoration: 'underline' }}>الشروط والأحكام</a>
-    <a href="/privacy-policy" style={{ color: '#666', textDecoration: 'underline' }}>سياسة الخصوصية</a>
-    <a href="/return-policy" style={{ color: '#666', textDecoration: 'underline' }}>سياسة الاسترداد</a>
-  </div>
-  <div style={{ marginTop: 15, fontSize: 11, color: '#aaa' }}>
-    ALTIMA Store - وثيقة العمل الحر FL-371212741 - ashwan241@gmail.com
-  </div>
-</div>
+      {/* Footer - روابط السياسات مطلوبة من Tap و Paylink */}
+      <div style={{ marginTop: 40, borderTop: '1px solid #222', padding: '30px 20px', textAlign: 'center', background: '#111114', borderRadius: 20, maxWidth: 1000, margin: '40px auto 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', fontSize: 14 }}>
+          <a href="/terms" style={{ color: '#00F5FF', textDecoration: 'underline' }}>الشروط والأحكام</a>
+          <a href="/privacy-policy" style={{ color: '#00F5FF', textDecoration: 'underline' }}>سياسة الخصوصية</a>
+          <a href="/return-policy" style={{ color: '#00F5FF', textDecoration: 'underline' }}>سياسة الاسترداد</a>
+        </div>
+        <div style={{ marginTop: 15, fontSize: 11, color: '#888' }}>
+          ALTIMA Store - وثيقة العمل الحر FL-371212741 - ashwan241@gmail.com - 0502963333
+        </div>
       </div>
     </div>
-  );
+  )
 }
