@@ -1,51 +1,28 @@
-'use client';
-import { useState } from 'react';
-
-export default function Page() {
-  const [cart, setCart] = useState(0);
-  
-  function order(p: string, amount: number) {
-    setCart(c => c + 1);
-    fetch('https://sahariosv4-5.vercel.app/api/webhook', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        product: p,
-        amount: amount,
-        customer: 'Guest',
-        order_id: 'ALT-' + Date.now(),
-        time: new Date().toISOString(),
-        source: 'altima-store'
-      })
-    });
-  }
-
+export default function TermsPage() {
   return (
-    <div dir="rtl" style={{ minHeight: '100vh', background: '#08080a', color: '#fff', padding: 20 }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-        <h1 style={{ textAlign: 'center', color: '#00F5FF' }}>ALTIMA STORE - مربوط بـ SAHARI OS v4.5</h1>
-        <p style={{ textAlign: 'center', fontSize: 11, color: '#888' }}>https://sahariosv4-5.vercel.app - Ready ✅</p>
-        <div style={{ textAlign: 'center', background: '#D44F37', color: '#fff', padding: 8, borderRadius: 999, margin: '10px auto', width: 150 }}>السلة: {cart}</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginTop: 20 }}>
-          <div style={{ background: '#111114', border: '1px solid #222', borderRadius: 20, padding: 16, textAlign: 'center' }}>
-            <h3>Hoodie</h3><p>199 SAR</p>
-            <button onClick={() => order('Hoodie Altima - 199 SAR', 199)} style={{ width: '100%', height: 44, borderRadius: 999, background: '#00F5FF', color: '#000', fontWeight: 900, border: 'none', cursor: 'pointer', marginTop: 10 }}>أضف للسلة - 199 SAR</button>
-          </div>
-          <div style={{ background: '#111114', border: '1px solid #222', borderRadius: 20, padding: 16, textAlign: 'center' }}>
-            <h3>CEO</h3><p>99 SAR</p>
-            <button onClick={() => order('CEO - 99 SAR', 99)} style={{ width: '100%', height: 44, borderRadius: 999, background: '#00F5FF', color: '#000', fontWeight: 900, border: 'none', cursor: 'pointer', marginTop: 10 }}>أضف للسلة - 99 SAR</button>
-          </div>
-          <div style={{ background: '#111114', border: '1px solid #222', borderRadius: 20, padding: 16, textAlign: 'center' }}>
-            <h3>CMD</h3><p>99 SAR</p>
-            <button onClick={() => order('CMD - 99 SAR', 99)} style={{ width: '100%', height: 44, borderRadius: 999, background: '#00F5FF', color: '#000', fontWeight: 900, border: 'none', cursor: 'pointer', marginTop: 10 }}>أضف للسلة - 99 SAR</button>
-          </div>
+    <div className="min-h-screen bg-white" dir="rtl">
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="mb-8">
+          <a href="/" className="text-sm text-gray-500 hover:text-black">← الرجوع للمتجر</a>
         </div>
-        <div style={{ marginTop: 20, background: '#111114', border: '1px solid #00F5FF', borderRadius: 16, padding: 12, textAlign: 'center' }}>
-          <div style={{ color: '#00F5FF', fontWeight: 900 }}>SAHARI OS Integration Status ✅</div>
-          <div style={{ fontSize: 11, color: '#888', marginTop: 6 }}>Webhook: https://sahariosv4-5.vercel.app/api/webhook - Ready</div>
-          <a href="/checkout" style={{ display: 'inline-block', marginTop: 10, background: '#D44F37', color: '#fff', padding: '8px 20px', borderRadius: 999, textDecoration: 'none' }}>اذهب للدفع →</a>
+        <h1 className="text-4xl font-black mb-2">الشروط والأحكام</h1>
+        <p className="text-gray-500 mb-10">آخر تحديث: 21 أكتوبر 2026 - ALTIMA Store - وثيقة العمل الحر FL-371212741</p>
+        
+        <div className="space-y-8 text- leading-8 text-gray-800">
+          <section>
+            <h2 className="text-xl font-bold mb-3">1. صاحب المتجر</h2>
+            <p>الاسم: محمد بن عبدالله بن عشوان<br/>رقم الهوية: 1035671989<br/>وثيقة العمل الحر: FL-371212741<br/>البريد: ashwan241@gmail.com - الجوال: 0502963333<br/>المتجر: https://altima-store.vercel.app</p>
+          </section>
+          <section>
+            <h2 className="text-xl font-bold mb-3">2. المنتجات والأسعار</h2>
+            <p>منتجات رقمية: حزمة ALTIMA التنفيذية (10 قوالب) - 199 ريال، القالب الفردي - 49 ريال، شاملة الضريبة 15%</p>
+          </section>
+          <section>
+            <h2 className="text-xl font-bold mb-3">3. الدفع والتسليم</h2>
+            <p>الدفع عبر Tap Payments و Paylink (مدى، فيزا، ماستركارد، Apple Pay) معتمد من SAMA. التسليم فوري رقمي عبر البريد.</p>
+          </section>
         </div>
       </div>
     </div>
-  );
+  )
 }
