@@ -79,7 +79,17 @@ export default function Page() {
             <a href="/checkout" style={{ background: '#D44F37', color: '#fff', padding: '8px 16px', borderRadius: 999, textDecoration: 'none', fontSize: 12 }}>جرب الشراء</a>
             <a href="https://sahariosvercelfixedstatic100.vercel.app" target="_blank" style={{ background: '#111', color: '#00F5FF', padding: '8px 16px', borderRadius: 999, textDecoration: 'none', fontSize: 12, border: '1px solid #00F5FF33' }}>افتح SAHARI OS</a>
           </div>
-        </div>
+        </{/* روابط السياسات - مطلوب من Tap و Paylink */}
+<div style={{ marginTop: 40, borderTop: '1px solid #eee', padding: '30px 20px', textAlign: 'center', background: '#fafafa' }}>
+  <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', fontSize: 14 }}>
+    <a href="/terms" style={{ color: '#666', textDecoration: 'underline' }}>الشروط والأحكام</a>
+    <a href="/privacy-policy" style={{ color: '#666', textDecoration: 'underline' }}>سياسة الخصوصية</a>
+    <a href="/return-policy" style={{ color: '#666', textDecoration: 'underline' }}>سياسة الاسترداد</a>
+  </div>
+  <div style={{ marginTop: 15, fontSize: 11, color: '#aaa' }}>
+    ALTIMA Store - وثيقة العمل الحر FL-371212741 - ashwan241@gmail.com
+  </div>
+</div>div>
       </div>
     </div>
   );
