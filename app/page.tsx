@@ -89,7 +89,7 @@ export default function Page() {
   <div style={{ marginTop: 15, fontSize: 11, color: '#aaa' }}>
     ALTIMA Store - وثيقة العمل الحر FL-371212741 - ashwan241@gmail.com
   </div>
-</div>div>
+</div>
       </div>
     </div>
   );
