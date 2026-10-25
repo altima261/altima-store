@@ -51,9 +51,9 @@ export default function Home() {
                 <div style={{ fontSize: 10, color: '#888' }}>{t.nameAr} • {t.file.replace('.docx','')}</div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 6 }}>
                   <span style={{ fontSize: 10, background: '#00F5FF', color: '#000', padding: '2px 6px', borderRadius: 10, fontWeight: 800 }}>{t.price}</span>
-                  <a href={`https://docs.google.com/document/d/${t.driveId}/edit`} target="_blank" style={{ fontSize: 9, color: '#00F5FF', textDecoration: 'underline' }}>معاينة</a>
+                  <a href={`https://docs.google.com/document/d/${t.driveId}/preview`} target="_blank" style={{ fontSize: 9, color: '#00F5FF', textDecoration: 'underline' }}>معاينة</a>
                 </div>
-                <a href={folderLink} target="_blank" style={{ display: 'block', marginTop: 8, background: '#FFD700', color: '#000', textAlign: 'center', padding: '5px', borderRadius: 8, fontSize: 10, fontWeight: 800, textDecoration: 'none' }}>جاهز - تحميل</a>
+                <a href={"/checkout"} style={{ display: 'block', marginTop: 8, background: '#FFD700', color: '#000', textAlign: 'center', padding: '5px', borderRadius: 8, fontSize: 10, fontWeight: 800, textDecoration: 'none' }}>جاهز - معاينة فخمة</a>
               </div>
             ))}
           </div>
