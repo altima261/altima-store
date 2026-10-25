@@ -2,12 +2,12 @@
 
 export default function Home() {
   const templates = [
-    { id: 'CEO-Gold', name: 'CEO Minimal Gold', role: 'المدير التنفيذي', color: '#D4AF37', price: '$15', tags: 'CEO, Executive, Gold' },
-    { id: 'CFO', name: 'CFO Executive', role: 'المدير المالي', color: '#0A1931', price: '$12', tags: 'CFO, Finance, Blue' },
-    { id: 'Legal', name: 'محامي شركات', role: 'المستشار القانوني', color: '#1A1A1A', price: '$10', tags: 'Legal, Lawyer, Black' },
-    { id: 'PMP', name: 'مدير مشاريع PMP', role: 'PMP Certified', color: '#0F4C75', price: '$12', tags: 'PMP, Project, Manager' },
-    { id: 'Sales', name: 'مدير مبيعات', role: 'Sales Director', color: '#B22222', price: '$8', tags: 'Sales, Director, Red' },
-    { id: 'HR', name: 'الاستشاري الذهبي', role: 'HR Consultant', color: '#2C3E50', price: '$10', tags: 'HR, Consultant' },
+    { id: 'CEO-Gold', name: 'CEO Minimal Gold', role: 'المدير التنفيذي', color: '#D4AF37', price: '59 ر.س', tags: 'CEO, Executive, Gold' },
+    { id: 'CFO', name: 'CFO Executive', role: 'المدير المالي', color: '#0A1931', price: '49 ر.س', tags: 'CFO, Finance, Blue' },
+    { id: 'Legal', name: 'محامي شركات', role: 'المستشار القانوني', color: '#1A1A1A', price: '39 ر.س', tags: 'Legal, Lawyer, Black' },
+    { id: 'PMP', name: 'مدير مشاريع PMP', role: 'PMP Certified', color: '#0F4C75', price: '49 ر.س', tags: 'PMP, Project, Manager' },
+    { id: 'Sales', name: 'مدير مبيعات', role: 'Sales Director', color: '#B22222', price: '29 ر.س', tags: 'Sales, Director, Red' },
+    { id: 'HR', name: 'الاستشاري الذهبي', role: 'HR Consultant', color: '#2C3E50', price: '39 ر.س', tags: 'HR, Consultant' },
   ]
 
   return (
@@ -59,7 +59,7 @@ export default function Home() {
             <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>وش فيه المصنع؟</p>
             <p style={{ fontSize: 12, color: '#aaa', lineHeight: 1.8 }}>
               1. 20 قالب تنفيذي جاهز للتصميم فوراً - مو للطلاب، فقط لموظفي الشركات: محامي شركات، مدير مشاريع، CEO Minimal Gold, CFO, مدير مبيعات PMP...<br/>
-              2. كل قالب معه: الألوان المقترحة، السعر (8$-15$)، والكلمات المفتاحية اللي تخليه يطلع أول في بحث Canva
+              2. كل قالب معه: الألوان المقترحة، السعر (29-59 ر.س)، والكلمات المفتاحية اللي تخليه يطلع أول في بحث Canva
             </p>
           </div>
         </section>
