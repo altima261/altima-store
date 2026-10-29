@@ -1,56 +1,56 @@
 "use client";
 import { useState } from "react";
-
 const templates = [
-  { id: "CEO", name: "Alexander Stone", kpi: "42% Growth | $120M M&A" },
-  { id: "CFO", name: "Alexander Reed", kpi: "+34% EBITDA | $12.5M Saved" },
-  { id: "CTO", name: "David Chen", kpi: "100M+ Users | AWS 99.99%" },
-  { id: "COO", name: "【entity-James Harrison¦canonical_name=James Harrison】", kpi: "98.2% Delivery | 22% Cut" },
-  { id: "CMO", name: "Sophia Reynolds", kpi: "+142% Growth | +310% ROI" },
-  { id: "CHRO", name: "Emma Williams", kpi: "8K+ Employees | 60% Scale" },
-  { id: "GM", name: "Robert Mitchell", kpi: "200+ Staff | 28% YoY" },
-  { id: "Sales", name: "Michael Torres", kpi: "$35M Revenue" },
-  { id: "Project", name: "Sarah Kim", kpi: "PMP | $50M Projects" },
-  { id: "Finance", name: "William Chen", kpi: "$400M Portfolio" },
-  { id: "Operations", name: "【entity-Jennifer Lopez¦canonical_name=Jennifer Lopez】", kpi: "6.5x Turnover" },
-  { id: "Legal", name: "【entity-Amanda Black¦canonical_name=Amanda Black】", kpi: "$600M Deals" },
-  { id: "Product", name: "Daniel Park", kpi: "$100M ARR" },
-  { id: "Marketing", name: "Lisa Martinez", kpi: "+127% Awareness" },
-  { id: "HR", name: "Olivia Green", kpi: "120+ HR Team" },
+  { id: 1, en: "CEO Royal Black Gold", ar: "المدير التنفيذي الملكي", price: "79 ر.س", color: "from-black to-zinc-800" },
+  { id: 2, en: "CFO Diamond", ar: "المدير المالي الماسي", price: "69 ر.س", color: "from-slate-900 to-blue-900" },
+  { id: 3, en: "General Manager", ar: "المدير العام", price: "49 ر.س", color: "from-zinc-800 to-zinc-900" },
+  { id: 4, en: "Executive Minimal", ar: "التنفيذي المينيمال", price: "29 ر.س", color: "from-zinc-700 to-zinc-800" },
+  { id: 5, en: "CTO Sapphire", ar: "المدير التقني الياقوتي", price: "59 ر.س", color: "from-blue-900 to-slate-900" },
+  { id: 6, en: "COO Onyx", ar: "مدير عمليات أونيكس", price: "59 ر.س", color: "from-gray-800 to-black" },
+  { id: 7, en: "Legal Platinum", ar: "محامي بلاتيني", price: "69 ر.س", color: "from-zinc-900 to-black" },
+  { id: 8, en: "CMO Gold", ar: "مدير تسويق ذهبي", price: "59 ر.س", color: "from-yellow-900 to-zinc-900" },
+  { id: 9, en: "CHRO Elite", ar: "مدير موارد بشرية", price: "49 ر.س", color: "from-stone-800 to-zinc-900" },
+  { id: 10, en: "Sales Titan", ar: "مبيعات تيتان", price: "39 ر.س", color: "from-zinc-800 to-neutral-900" },
+  { id: 11, en: "Project Commander", ar: "مدير مشاريع", price: "49 ر.س", color: "from-neutral-800 to-zinc-800" },
+  { id: 12, en: "Finance Sovereign", ar: "مالية سيادية", price: "69 ر.س", color: "from-slate-800 to-black" },
+  { id: 13, en: "Operations Forge", ar: "عمليات فورج", price: "49 ر.س", color: "from-zinc-900 to-stone-900" },
+  { id: 14, en: "Product Vision", ar: "منتج فيجن", price: "59 ر.س", color: "from-gray-900 to-zinc-900" },
+  { id: 15, en: "Marketing Pulse", ar: "تسويق نبض", price: "59 ر.س", color: "from-zinc-800 to-black" },
 ];
-
 export default function Page() {
-  const [open, setOpen] = useState(false);
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white" dir="rtl">
-      <nav className="sticky top-0 z-50 bg-black/80 border-b border-white/10 backdrop-blur">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="font-serif text-xl tracking-widest">ALTIMA</div>
-          <button onClick={() => setOpen(!open)} className="md:hidden w-10 h-10 bg-white/10 rounded-full">☰</button>
-          <a href="/checkout" className="hidden md:block bg-[#C5A055] text-black px-5 py-2 rounded-full font-bold">شراء 199 ر.س</a>
-        </div>
+    <main dir="rtl" className="min-h-screen bg-[#080808] text-white">
+      <nav className="sticky top-0 z-50 bg-black/90 border-b border-white/10 px-4 py-3 flex justify-between">
+        <div className="font-serif text-xl">ALTIMA</div>
+        <div className="text-xs text-white/60">FL-371212741 | 1035611989</div>
       </nav>
-
-      <section className="max-w-7xl mx-auto px-4 pt-16 pb-12">
-        <h1 className="font-serif text-4xl md:text-6xl">سير ذاتية<br/><span className="text-[#C5A055]">لمجالس الإدارة</span></h1>
-        <p className="mt-4 text-white/60">15 قالب فاخر أسود-ذهبي - كل قالب شكل مختلف - Generic بدون اسمك</p>
-        <a href="/checkout" className="inline-block mt-6 bg-[#C5A055] text-black px-8 py-4 rounded-full font-bold">احصل على الـ 15 قالب - 199 ر.س</a>
+      <section className="px-4 py-10 text-center">
+        <h1 className="text-4xl md:text-6xl font-serif">حزمة ALTIMA الفاخرة<br/>15 قالب تنفيذي</h1>
+        <p className="mt-4 text-white/60 text-sm">مصنعك الخاص Luxury Edition - تسليم فوري Google Drive</p>
       </section>
-
-      <section className="max-w-7xl mx-auto px-4 pb-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className="px-4 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-28">
         {templates.map((t) => (
-          <div key={t.id} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
-            <div className="text-xs text-[#C5A055]">ALTIMA • {t.id}</div>
-            <div className="font-serif text-xl mt-1">{t.name}</div>
-            <div className="mt-3 text-xs text-[#C5A055] bg-white/5 border border-white/10 rounded-xl px-3 py-2">{t.kpi}</div>
-            <div className="mt-2 text-[11px] text-white/40">Word • A4 • Generic</div>
+          <div key={t.id} className="rounded-2xl border border-white/10 overflow-hidden bg-[#121212]">
+            <div className={`h-28 bg-gradient-to-br ${t.color} flex items-center justify-center`}>
+              <span className="text-sm">{t.en}</span>
+            </div>
+            <div className="p-3">
+              <h3 className="text-sm font-bold">{t.en}</h3>
+              <p className="text-xs text-white/50">{t.ar}</p>
+              <a href="/checkout" className="mt-3 block w-full text-center bg-[#f5d76e] text-black py-2.5 rounded-xl text-sm font-bold">جاهز - اطلب 249 ر.س</a>
+            </div>
           </div>
         ))}
       </section>
-
-      <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-black/80 border-t border-white/10">
-        <a href="/checkout" className="w-full bg-[#C5A055] text-black py-4 rounded-full font-bold text-center block">شراء 15 قالب - 199 ر.س</a>
-      </div>
+      <footer className="border-t border-white/10 bg-black px-4 py-8 text-center text-xs text-white/50">
+        <div className="flex justify-center gap-4 mb-4">
+          <a href="/terms" className="underline">الشروط</a>
+          <a href="/privacy-policy" className="underline">الخصوصية</a>
+          <a href="/return-policy" className="underline">الاسترجاع</a>
+        </div>
+        <p>ALTIMA - 1035611989 - FL-371212741 - ashwan241@gmail.com - 0502836333</p>
+        <p>https://altima-store.vercel.app</p>
+      </footer>
     </main>
   );
 }
