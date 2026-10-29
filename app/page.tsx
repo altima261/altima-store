@@ -1,84 +1,64 @@
-'use client'
+"use client";
+import { useState } from "react";
 
-export default function Home() {
-  const templates = [
-    { id: '01', name: 'CEO Executive', ar: 'المدير التنفيذي', price: '59 ر.س', color: '#D4AF37', fileId: '11ZfRN-qL4kX-2zhgAEt9dsZRuYBkY4uN' },
-    { id: '02', name: 'CMO Marketing', ar: 'مدير التسويق', price: '49 ر.س', color: '#8E44AD', fileId: '1AKwyv4ImTw01ZyjIAy-Uu7iIws7qgCHC' },
-    { id: '03', name: 'CFO Finance', ar: 'المدير المالي', price: '49 ر.س', color: '#0A1931', fileId: '1aWVrhqK40DfPhdNnAMZxue1zPVSquogh' },
-    { id: '04', name: 'COO Operations', ar: 'مدير العمليات', price: '39 ر.س', color: '#2C3E50', fileId: '1be03tw5On2ASfTa08s7cZl7y2Tn-dCrb' },
-    { id: '05', name: 'CTO Technology', ar: 'المدير التقني', price: '39 ر.س', color: '#0F4C75', fileId: '1V1nU0eMBGo-XjAsN-lfJ363HDRjcAjjn' },
-    { id: '06', name: 'CHRO HR', ar: 'الموارد البشرية', price: '39 ر.س', color: '#1A5276', fileId: '1mvsvxKDFTWrMPY8F9JFe2ua3vO9h1SHl' },
-    { id: '07', name: 'Project Director PMP', ar: 'مدير مشاريع PMP', price: '49 ر.س', color: '#117A65', fileId: '1SksGYJkgaeHsCOxyYd4tAIZW4poBJMgc' },
-    { id: '08', name: 'Sales Director', ar: 'مدير مبيعات', price: '29 ر.س', color: '#B22222', fileId: '1jgTxuow_8z2paBIvm-QTDuwgFaVjbxtK' },
-    { id: '09', name: 'General Manager', ar: 'المدير العام', price: '39 ر.س', color: '#212121', fileId: '17ccI4k9nx31x5cKHc8Y0rXbMfdZjjWNR' },
-    { id: '10', name: 'Executive Minimal', ar: 'التنفيذي المينيمال', price: '29 ر.س', color: '#5D6D7E', fileId: '15EvAR0FcnkgPdVJAqSsRQPJ2LXwgkrb_' },
-    { id: '11', name: 'CEO Royal Black Gold', ar: 'المدير التنفيذي الملكي', price: '79 ر.س', color: '#000000', fileId: 'NEW', isNew: true },
-    { id: '12', name: 'CFO Diamond', ar: 'المدير المالي الماسي', price: '69 ر.س', color: '#2980B9', fileId: 'NEW', isNew: true },
-    { id: '13', name: 'Legal Platinum', ar: 'محامي بلاتيني', price: '69 ر.س', color: '#1A1A1A', fileId: 'NEW', isNew: true },
-    { id: '14', name: 'COO Onyx', ar: 'مدير عمليات أونيكس', price: '59 ر.س', color: '#2C3E50', fileId: 'NEW', isNew: true },
-    { id: '15', name: 'CTO Sapphire', ar: 'المدير التقني الياقوتي', price: '59 ر.س', color: '#0F4C75', fileId: 'NEW', isNew: true },
-  ]
+const templates = [
+  { id: "CEO", name: "Alexander Stone", title: "Chief Executive Officer", color: "from-black to-zinc-900", kpi: "42% Growth | $120M M&A", best: "CEO / GM" },
+  { id: "CFO", name: "Alexander Reed", title: "Chief Financial Officer", color: "from-zinc-900 to-black", kpi: "+34% EBITDA | $12.5M Saved", best: "CFO / Finance - الأكثر مبيعاً", badge: "BEST" },
+  { id: "CTO", name: "David Chen", title: "Chief Technology Officer", color: "from-slate-900 to-blue-950", kpi: "100M+ Users | AWS 99.99%", best: "CTO / Tech" },
+  { id: "COO", name: "【entity-James Harrison¦canonical_name=James Harrison】", title: "Chief Operating Officer", color: "from-neutral-900 to-zinc-800", kpi: "98.2% Delivery | 22% Cost Cut", best: "COO / Operations" },
+  { id: "CMO", name: "Sophia Reynolds", title: "Chief Marketing Officer", color: "from-black to-rose-950", kpi: "+142% Growth | +310% ROI", best: "CMO / Marketing" },
+  { id: "CHRO", name: "Emma Williams", title: "CHRO - People & Culture", color: "from-zinc-900 to-red-950", kpi: "8K+ Employees | 60% Scale", best: "CHRO / HR" },
+  { id: "GM", name: "Robert Mitchell", title: "Executive General Manager", color: "from-black to-stone-900", kpi: "200+ Staff | 28% YoY", best: "GM / Director" },
+  { id: "Sales", name: "Michael Torres", title: "Sales Director", color: "from-zinc-900 to-amber-950", kpi: "$35M Revenue | 15% Growth", best: "Sales" },
+  { id: "Project", name: "Sarah Kim", title: "Project Director | PMP", color: "from-slate-900 to-zinc-900", kpi: "PMP | $50M Projects", best: "Project Mgmt" },
+  { id: "Finance", name: "William Chen", title: "Finance Director", color: "from-black to-yellow-950", kpi: "$400M Portfolio | 22% Margin", best: "Finance" },
+  { id: "Operations", name: "【entity-Jennifer Lopez¦canonical_name=Jennifer Lopez】", title: "Operations Manager", color: "from-neutral-900 to-black", kpi: "6.5x Turnover | 99.1% SLA", best: "Operations" },
+  { id: "Legal", name: "【entity-Amanda Black¦canonical_name=Amanda Black】", title: "Legal Counsel Executive", color: "from-slate-950 to-blue-950", kpi: "$600M Deals | Compliance", best: "Legal" },
+  { id: "Product", name: "Daniel Park", title: "Product Manager", color: "from-black to-zinc-800", kpi: "$100M ARR | 45% Retention", best: "Product" },
+  { id: "Marketing", name: "Lisa Martinez", title: "Marketing Director", color: "from-black to-pink-950", kpi: "+127% Awareness | +210% ROI", best: "Marketing" },
+  { id: "HR", name: "Olivia Green", title: "HR Director", color: "from-zinc-900 to-neutral-900", kpi: "120+ HR Team | 42% Efficiency", best: "HR" },
+];
 
-  const folderLink = 'https://drive.google.com/drive/folders/1iyo_1gS593ge8_3o9Ns3zRgwxbb_MbTz'
-
+export default function Page() {
+  const [mobileOpen, setMobileOpen] = useState(false);
   return (
-    <div dir="rtl" style={{ minHeight: '100vh', background: '#08080a', color: '#fff', fontFamily: 'system-ui', padding: 16 }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: 1100, margin: '0 auto 20px', padding: '12px 18px', background: '#111114', borderRadius: 24, border: '1px solid #222' }}>
-        <div>
-          <h1 style={{ fontSize: 18, fontWeight: 900 }}>ALTIMA FACTORY - 15 قالب</h1>
-          <p style={{ fontSize: 10, color: '#00FF88' }}>✅ 15 ملف مرفوع على Google Drive - Viewer محمي</p>
-        </div>
-        <span style={{ background: '#00F5FF', color: '#000', padding: '6px 12px', borderRadius: 20, fontSize: 11, fontWeight: 800 }}>84% مبيعات</span>
-      </header>
-
-      <main style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <section style={{ textAlign: 'center', padding: '20px 10px' }}>
-          <h2 style={{ fontSize: 38, fontWeight: 900, marginBottom: 8 }}>مصنعك الخاص<br/><span style={{ color: '#FFD700' }}>Luxury Edition - 15 قالب</span></h2>
-          <p style={{ fontSize: 12, color: '#aaa' }}>10 قوالب أساسية + 5 قوالب فخمة جديدة - Viewer محمي - معاينة فقط</p>
-          <div style={{ marginTop: 12, background: '#111', border: '1px solid #222', display: 'inline-flex', gap: 8, padding: '8px 16px', borderRadius: 30, fontSize: 11 }}>
-            <span style={{ background: '#FFD700', color: '#000', padding: '2px 8px', borderRadius: 10, fontWeight: 800 }}>15 ملف</span>
-            <span>مرفوعة على Google Drive وجاهزة للتسليم</span>
-            <span style={{ color: '#00FF88' }}>✅ محمية</span>
-          </div>
-        </section>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 12, marginTop: 20 }}>
-          {templates.map((t) => (
-            <div key={t.id} style={{ background: '#111114', border: t.isNew ? '1px solid #FFD700' : '1px solid #222', borderRadius: 16, padding: 10, position: 'relative' }}>
-              {t.isNew && <div style={{ position: 'absolute', top: -6, right: 8, background: '#FFD700', color: '#000', fontSize: 8, padding: '2px 6px', borderRadius: 8, fontWeight: 900 }}>جديد فخم</div>}
-              <div style={{ height: 70, background: `linear-gradient(135deg, ${t.color} 0%, #000 100%)`, borderRadius: 10, marginBottom: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 900, textAlign: 'center' }}>{t.name}</div>
-              <div style={{ fontSize: 10, fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{t.name}</div>
-              <div style={{ fontSize: 9, color: '#888' }}>{t.ar}</div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 6 }}>
-                <span style={{ fontSize: 9, background: t.isNew ? '#FFD700' : '#00F5FF', color: '#000', padding: '2px 6px', borderRadius: 10, fontWeight: 800 }}>{t.price}</span>
-                {t.fileId !== 'NEW' ? <a href={`https://docs.google.com/document/d/${t.fileId}/preview`} target="_blank" style={{ fontSize: 8, color: '#00F5FF', textDecoration: 'underline' }}>معاينة فقط</a> : <span style={{ fontSize: 8, color: '#FFD700' }}>معاينة فخمة</span>}
-              </div>
-              <a href="/checkout" style={{ display: 'block', marginTop: 6, background: t.isNew ? '#FFD700' : '#fff', color: '#000', textAlign: 'center', padding: '5px', borderRadius: 8, fontSize: 9, fontWeight: 800, textDecoration: 'none' }}>جاهز - اطلب 249 ر.س</a>
+    <main className="min-h-screen bg-[#0a0a0a] text-white antialiased" dir="rtl">
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-black/70 border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-gradient-to-br from-[#C5A055] to-[#8B6F2B] rounded-lg flex items-center justify-center font-serif font-bold">A</div>
+            <div>
+              <div className="font-serif text-xl tracking-[0.2em]">ALTIMA</div>
+              <div className="text-[10px] tracking-widest text-[#C5A055]">ألتيما - قوالب تنفيذية فاخرة</div>
             </div>
-          ))}
+          </div>
+          <div className="hidden md:flex items-center gap-6 text-sm">
+            <a href="#templates" className="text-white/70 hover:text-white">القوالب</a>
+            <a href="/privacy-policy" className="text-white/70 hover:text-white">الخصوصية</a>
+            <a href="/checkout" className="bg-[#C5A055] text-black px-5 py-2 rounded-full font-bold">شراء الباقة - 199 ر.س</a>
+          </div>
+          <button className="md:hidden w-11 h-11 rounded-full bg-white/10 flex items-center justify-center" onClick={()=>setMobileOpen(!mobileOpen)}>☰</button>
         </div>
-
-        <div style={{ marginTop: 24, background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)', color: '#000', borderRadius: 20, padding: 20, textAlign: 'center' }}>
-          <h3 style={{ fontSize: 18, fontWeight: 900 }}>حزمة ALTIMA الفاخرة - 15 قالب - 249 ر.س</h3>
-          <p style={{ fontSize: 11, marginTop: 4 }}>10 قوالب الأساسية + 5 قوالب فخمة جديدة - Viewer محمي - تسليم فوري بعد الدفع</p>
-          <div style={{ marginTop: 12, display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="/checkout" style={{ background: '#000', color: '#FFD700', padding: '10px 24px', borderRadius: 30, fontWeight: 800, textDecoration: 'none', fontSize: 13 }}>اطلب الحزمة - 249 ر.س</a>
-            <a href={folderLink} target="_blank" style={{ background: '#fff', color: '#000', padding: '10px 20px', borderRadius: 30, fontWeight: 700, textDecoration: 'none', fontSize: 12 }}>فتح مجلد الدرايف (15 ملف)</a>
+        {mobileOpen && (
+          <div className="md:hidden px-4 pb-4 flex flex-col gap-3">
+            <a href="#templates" className="py-3 px-4 bg-white/5 rounded-xl">القوالب الـ 15</a>
+            <a href="/checkout" className="py-3 px-4 bg-[#C5A055] text-black rounded-xl font-bold text-center">شراء الآن - 199 ر.س</a>
+          </div>
+        )}
+      </nav>
+      <section className="max-w-7xl mx-auto px-4 md:px-8 pt-16 md:pt-24 pb-12 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C5A055]/15 border border-[#C5A055]/30 text-[#C5A055] text-xs mb-4">✦ V2 فاخر - 15 قالب تنفيذي</div>
+          <h1 className="font-serif text-4xl md:text-6xl leading-[1.1]">سير ذاتية<br/><span className="text-[#C5A055]">لمجالس الإدارة</span></h1>
+          <p className="mt-4 text-white/60 text-base md:text-lg">15 قالب فاخر أسود-ذهبي، كل قالب شكل مختلف، بدون اسمك، Generic.</p>
+          <div className="mt-8 flex gap-3">
+            <a href="/checkout" className="flex-1 md:flex-none bg-[#C5A055] text-black px-8 py-4 rounded-full font-bold text-center">احصل على الـ 15 قالب - 199 ر.س</a>
           </div>
         </div>
-      </main>
-
-      <div style={{ marginTop: 30, borderTop: '1px solid #222', padding: '20px', textAlign: 'center', background: '#111114', borderRadius: 16, maxWidth: 1100, margin: '30px auto 0' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 16, fontSize: 12, flexWrap: 'wrap' }}>
-          <a href="/terms" style={{ color: '#00F5FF' }}>الشروط والأحكام</a>
-          <a href="/privacy-policy" style={{ color: '#00F5FF' }}>سياسة الخصوصية</a>
-          <a href="/return-policy" style={{ color: '#00F5FF' }}>سياسة الاسترداد</a>
-        </div>
-        <div style={{ marginTop: 10, fontSize: 9, color: '#777' }}>
-          ALTIMA Factory - 15 قالب - FL-371212741 - Viewer محمي - Google Drive - Altima Templates<br/>
-          06-CHRO إلى 15-CTO Sapphire - تم التحديث 4:35-4:37 PM - ✅ محمي
-        </div>
-      </div>
-    </div>
-  )
-}
+        <div className="relative">
+          <div className="rounded-[24px] border border-[#C5A055]/30 bg-gradient-to-br from-zinc-900 to-black p-2">
+            <div className="rounded-[18px] bg-white text-black p-6 aspect-[3/4] flex flex-col justify-between">
+              <div>
+                <div className="text-[#C5A055] text-xs">ALTIMA • CFO</div>
+                <div className="font-serif text-3xl mt-2">ALEXANDER REED</div>
+                <div className="text-[#8B6F2B] text-xs mt-1">CHIEF FINANCIAL OFFICER — CFO</div
