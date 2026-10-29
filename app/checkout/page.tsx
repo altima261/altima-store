@@ -1,48 +1,33 @@
-'use client';
-import { useState } from 'react';
-
-export default function Checkout() {
-  const [form, setForm] = useState({ product: 'Hoodie Altima - 199 SAR', name: '', email: '', phone: '' });
-  const [status, setStatus] = useState('');
-  
-  function submit(e: any) {
+"use client";
+import { useState } from "react";
+const DRIVE_LINK = "https://drive.google.com/drive/folders/1iyo_1gS593ge8_3o9Ns3zRgwxbb_MbTz";
+export default function CheckoutPage() {
+  const [form, setForm] = useState({ name: "", email: "", phone: "" });
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    const payload = {
-      product: form.product,
-      customer: form.name,
-      email: form.email,
-      phone: form.phone,
-      amount: form.product.includes('199') ? 199 : 99,
-      order_id: 'ALT-' + Date.now(),
-      time: new Date().toISOString()
-    };
-    fetch('https://sahariosv4-5.vercel.app/api/webhook', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    setStatus('✅ تم الطلب - SAHARI OS v4.5 ينفذ 163 خدمة - https://sahariosv4-5.vercel.app');
-  }
-  
+    setLoading(true);
+    const msg = `طلب جديد ALTIMA V2%0Aالاسم: ${form.name}%0Aالبريد: ${form.email}%0Aالجوال: ${form.phone}%0Aالمنتج: 15 قالب فاخر - 199 ر.س%0Aرابط: ${DRIVE_LINK}`;
+    window.open(`https://wa.me/966502836333?text=${msg}`, "_blank");
+    window.location.href = `/success?email=${encodeURIComponent(form.email)}&name=${encodeURIComponent(form.name)}`;
+  };
   return (
-    <div dir="rtl" style={{ minHeight: '100vh', background: '#08080a', color: '#fff', padding: 20 }}>
-      <div style={{ maxWidth: 460, margin: '30px auto', background: '#111114', borderRadius: 24, padding: 20 }}>
-        <h1 style={{ textAlign: 'center' }}>SAHARI OS + altima-store</h1>
-        <p style={{ textAlign: 'center', fontSize: 10, color: '#00F5FF' }}>https://sahariosv4-5.vercel.app - Connected ✅</p>
-        <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 16 }}>
-          <select value={form.product} onChange={e => setForm({ ...form, product: e.target.value })} style={{ padding: 12, borderRadius: 12, background: '#1a1a1a', color: '#fff' }}>
-            <option>Hoodie Altima - 199 SAR</option>
-            <option>CEO - 99 SAR</option>
-            <option>CMD - 99 SAR</option>
-          </select>
-          <input required placeholder="اسمك" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} style={{ padding: 12, borderRadius: 12, background: '#1a1a1a', color: '#fff' }} />
-          <input required type="email" placeholder="بريدك" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} style={{ padding: 12, borderRadius: 12, background: '#1a1a1a', color: '#fff' }} />
-          <input required placeholder="جوالك" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} style={{ padding: 12, borderRadius: 12, background: '#1a1a1a', color: '#fff' }} />
-          <div style={{ background: '#08080a', border: '1px dashed #2a2a30', borderRadius: 12, padding: 10, fontSize: 11, color: '#aaa' }}>STC Pay: 0502830333 - صالح الهذلي - مربوط بـ SAHARI OS v4.5</div>
-          <button style={{ height: 50, borderRadius: 999, background: '#D44F37', color: '#fff', fontWeight: 900, border: 'none' }}>اطلب الآن</button>
-          {status && <div style={{ background: '#0a1a0a', border: '1px solid #0f0', borderRadius: 12, padding: 10, color: '#0f0', textAlign: 'center' }}>{status}</div>}
-        </form>
+    <main className="min-h-screen bg-[#0a0a0a] text-white" dir="rtl">
+      <div className="max-w-xl mx-auto px-4 py-10">
+        <div className="text-center mb-8">
+          <h1 className="font-serif text-3xl mt-4">إتمام الطلب - دفع آمن</h1>
+          <p className="text-white/50 text-sm mt-2">الباقة الكاملة 15 قالب • توصيل فوري</p>
+        </div>
+        <div className="rounded-[24px] bg-white/[0.04] border border-white/10 p-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input required value={form.name} onChange={(e)=>setForm({...form, name: e.target.value})} className="w-full rounded-xl bg-white text-black px-4 py-4" placeholder="الاسم الكامل" />
+            <input required type="email" value={form.email} onChange={(e)=>setForm({...form, email: e.target.value})} className="w-full rounded-xl bg-white text-black px-4 py-4" placeholder="البريد الإلكتروني" />
+            <input required value={form.phone} onChange={(e)=>setForm({...form, phone: e.target.value})} className="w-full rounded-xl bg-white text-black px-4 py-4" placeholder="رقم الجوال" dir="ltr" />
+            <div className="rounded-xl bg-[#C5A055]/10 border border-[#C5A055]/20 p-4 text-sm">STC Pay: <b>0502836333</b><div className="text-xs text-white/50 mt-1">بعد التحويل نرسل الرابط فوراً</div></div>
+            <button disabled={loading} type="submit" className="w-full bg-[#C5A055] text-black font-bold py-4 rounded-full">{loading ? "جاري..." : "تأكيد الطلب عبر واتساب - 199 ر.س"}</button>
+          </form>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
