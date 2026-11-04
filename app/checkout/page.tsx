@@ -1,33 +1,60 @@
 "use client";
 import { useState } from "react";
-const DRIVE_LINK = "https://drive.google.com/drive/folders/1iyo_1gS593ge8_3o9Ns3zRgwxbb_MbTz";
+
 export default function CheckoutPage() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "" });
+  const [email, setEmail] = useState("ashwan241@gmail.com");
+  const [name, setName] = useState("Mohammed Binashwan");
   const [loading, setLoading] = useState(false);
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const [error, setError] = useState("");
+
+  const handlePay = async () => {
     setLoading(true);
-    const msg = `طلب جديد ALTIMA V2%0Aالاسم: ${form.name}%0Aالبريد: ${form.email}%0Aالجوال: ${form.phone}%0Aالمنتج: 15 قالب فاخر - 199 ر.س%0Aرابط: ${DRIVE_LINK}`;
-    window.open(`https://wa.me/966502836333?text=${msg}`, "_blank");
-    window.location.href = `/success?email=${encodeURIComponent(form.email)}&name=${encodeURIComponent(form.name)}`;
+    setError("");
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error?.message || "فشل الدفع");
+      if (data.transaction_url) {
+        window.location.href = data.transaction_url;
+      } else {
+        throw new Error("ما جا رابط الدفع من Tap");
+      }
+    } catch (e: any) {
+      setError(e.message);
+      setLoading(false);
+    }
   };
+
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white" dir="rtl">
-      <div className="max-w-xl mx-auto px-4 py-10">
-        <div className="text-center mb-8">
-          <h1 className="font-serif text-3xl mt-4">إتمام الطلب - دفع آمن</h1>
-          <p className="text-white/50 text-sm mt-2">الباقة الكاملة 15 قالب • توصيل فوري</p>
+    <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-[#141414] rounded-[24px] p-8 border border-[#222]">
+        <h1 className="text-[28px] font-bold text-center">ALTIMA EXECUTIVE</h1>
+        <p className="text-[#888] text-center mt-2 text-[14px]">15 Luxury Templates - CEO Collection</p>
+        <div className="mt-6 flex items-baseline justify-center gap-2">
+          <span className="text-[42px] font-bold">249</span>
+          <span className="text-[#888]">ر.س</span>
+          <span className="ml-2 line-through text-[#555]">499 ر.س</span>
         </div>
-        <div className="rounded-[24px] bg-white/[0.04] border border-white/10 p-6">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input required value={form.name} onChange={(e)=>setForm({...form, name: e.target.value})} className="w-full rounded-xl bg-white text-black px-4 py-4" placeholder="الاسم الكامل" />
-            <input required type="email" value={form.email} onChange={(e)=>setForm({...form, email: e.target.value})} className="w-full rounded-xl bg-white text-black px-4 py-4" placeholder="البريد الإلكتروني" />
-            <input required value={form.phone} onChange={(e)=>setForm({...form, phone: e.target.value})} className="w-full rounded-xl bg-white text-black px-4 py-4" placeholder="رقم الجوال" dir="ltr" />
-            <div className="rounded-xl bg-[#C5A055]/10 border border-[#C5A055]/20 p-4 text-sm">STC Pay: <b>0502836333</b><div className="text-xs text-white/50 mt-1">بعد التحويل نرسل الرابط فوراً</div></div>
-            <button disabled={loading} type="submit" className="w-full bg-[#C5A055] text-black font-bold py-4 rounded-full">{loading ? "جاري..." : "تأكيد الطلب عبر واتساب - 199 ر.س"}</button>
-          </form>
+        <div className="mt-8 space-y-4">
+          <input value={name} onChange={e=>setName(e.target.value)} placeholder="الاسم" className="w-full h-[52px] px-4 rounded-[12px] bg-[#1e1e1e] border border-[#2a2a2a]" />
+          <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="الإيميل *" className="w-full h-[52px] px-4 rounded-[12px] bg-[#1e1e1e] border border-[#2a2a2a]" />
+          {error && <p className="text-[#ff6b6b] text-center text-[13px]">{error}</p>}
+          <button onClick={handlePay} disabled={loading} className="w-full h-[56px] rounded-[14px] bg-gradient-to-r from-[#c5a059] to-[#e8c88a] text-black font-bold">
+            {loading ? "جاري التحويل لـ Tap..." : "ادفع الآن - 249 ر.س 💳"}
+          </button>
+          <div className="flex justify-center gap-2 pt-2 opacity-60 text-[10px]">
+            <span className="border border-[#333] px-2 py-1 rounded">MADA</span>
+            <span className="border border-[#333] px-2 py-1 rounded">Apple Pay</span>
+            <span className="border border-[#333] px-2 py-1 rounded">STC Pay</span>
+            <span className="border border-[#333] px-2 py-1 rounded">VISA</span>
+          </div>
+          <p className="text-[11px] text-[#666] text-center">دفع آمن عبر Tap - ALTIMASTOREKSA26 - 68090867<br/>بعد الدفع تحويل تلقائي لصفحة التحميل</p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
