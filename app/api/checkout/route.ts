@@ -4,10 +4,9 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
     const TAP_SECRET = process.env.TAP_SECRET_KEY;
-    const TAP_MERCHANT = process.env.TAP_MERCHANT_ID || "68090908";
 
     if (!TAP_SECRET) {
-      return NextResponse.json({ message: "TAP_SECRET_KEY missing in Production" }, { status: 500 });
+      return NextResponse.json({ message: "TAP_SECRET_KEY missing" }, { status: 500 });
     }
 
     const payload = {
@@ -19,16 +18,14 @@ export async function POST(req: NextRequest) {
         email: body.email || "ashwan241@gmail.com",
         phone: { country_code: "966", number: "502836333" }
       },
-      merchant_id: TAP_MERCHANT,
       source: { id: "src_all" },
-      payment_type: "all",
       redirect: { url: "https://altima-store.vercel.app/success" },
       post: { url: "https://altima-store.vercel.app/success" },
       description: "ALTIMA 15 Luxury Templates",
       reference: { transaction: "ALTIMA-" + Date.now(), order: "ALTIMA-249" }
     };
 
-    const r = await fetch("https://api.tap.company/v2/checkout", {
+    const r = await fetch("https://api.tap.company/v2/charges", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${TAP_SECRET}`,
