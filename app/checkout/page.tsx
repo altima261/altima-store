@@ -1,60 +1,71 @@
-// Tap Live - ALTIMASTOREKSA26 - 68090867 - 249 SAR - Ready
 "use client";
 import { useState } from "react";
 
-export default function CheckoutPage() {
-  const [email, setEmail] = useState("ashwan241@gmail.com");
+export default function Checkout() {
   const [name, setName] = useState("Mohammed Binashwan");
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("ashwan241@gmail.com");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handlePay = async () => {
-    setLoading(true);
+  async function pay() {
     setError("");
+    setLoading(true);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name })
+        body: JSON.stringify({ name, email }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error?.message || "فشل الدفع");
       if (data.transaction_url) {
         window.location.href = data.transaction_url;
       } else {
-        throw new Error("ما جا رابط الدفع من Tap");
+        setError(data.message || "فشل الدفع");
       }
     } catch (e: any) {
-      setError(e.message);
-      setLoading(false);
+      setError("فشل الدفع: " + e.message);
     }
-  };
+    setLoading(false);
+  }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-[#141414] rounded-[24px] p-8 border border-[#222]">
-        <h1 className="text-[28px] font-bold text-center">ALTIMA EXECUTIVE</h1>
-        <p className="text-[#888] text-center mt-2 text-[14px]">15 Luxury Templates - CEO Collection</p>
-        <div className="mt-6 flex items-baseline justify-center gap-2">
-          <span className="text-[42px] font-bold">249</span>
-          <span className="text-[#888]">ر.س</span>
-          <span className="ml-2 line-through text-[#555]">499 ر.س</span>
+    <div style={{ background: "#0a0a0a", minHeight: "100vh", display: "flex", justifyContent: "center", padding: "20px" }}>
+      <div style={{ background: "#111", borderRadius: "20px", padding: "30px", maxWidth: "480px", width: "100%", textAlign: "center" }}>
+        <h1 style={{ color: "#fff", fontSize: "32px", fontWeight: "bold" }}>ALTIMA EXECUTIVE</h1>
+        <p style={{ color: "#999" }}>Luxury Templates - CEO Collection 15</p>
+        <div style={{ margin: "20px 0" }}>
+          <span style={{ color: "#666", textDecoration: "line-through" }}>499 ر.س</span>
+          <span style={{ color: "#fff", fontSize: "48px", fontWeight: "bold", marginRight: "10px" }}>249 ر.س</span>
         </div>
-        <div className="mt-8 space-y-4">
-          <input value={name} onChange={e=>setName(e.target.value)} placeholder="الاسم" className="w-full h-[52px] px-4 rounded-[12px] bg-[#1e1e1e] border border-[#2a2a2a]" />
-          <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="الإيميل *" className="w-full h-[52px] px-4 rounded-[12px] bg-[#1e1e1e] border border-[#2a2a2a]" />
-          {error && <p className="text-[#ff6b6b] text-center text-[13px]">{error}</p>}
-          <button onClick={handlePay} disabled={loading} className="w-full h-[56px] rounded-[14px] bg-gradient-to-r from-[#c5a059] to-[#e8c88a] text-black font-bold">
-            {loading ? "جاري التحويل لـ Tap..." : "ادفع الآن - 249 ر.س 💳"}
-          </button>
-          <div className="flex justify-center gap-2 pt-2 opacity-60 text-[10px]">
-            <span className="border border-[#333] px-2 py-1 rounded">MADA</span>
-            <span className="border border-[#333] px-2 py-1 rounded">Apple Pay</span>
-            <span className="border border-[#333] px-2 py-1 rounded">STC Pay</span>
-            <span className="border border-[#333] px-2 py-1 rounded">VISA</span>
-          </div>
-          <p className="text-[11px] text-[#666] text-center">دفع آمن عبر Tap - ALTIMASTOREKSA26 - 68090867<br/>بعد الدفع تحويل تلقائي لصفحة التحميل</p>
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="الاسم"
+          style={{ width: "100%", padding: "14px", borderRadius: "12px", background: "#1a1a1a", color: "#fff", border: "1px solid #333", marginBottom: "12px", textAlign: "right" }}
+        />
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="الإيميل"
+          style={{ width: "100%", padding: "14px", borderRadius: "12px", background: "#1a1a1a", color: "#fff", border: "1px solid #333", marginBottom: "12px", textAlign: "right" }}
+        />
+        {error && <p style={{ color: "#ff5555", fontSize: "14px", wordBreak: "break-word" }}>{error}</p>}
+        <button
+          onClick={pay}
+          disabled={loading}
+          style={{ width: "100%", padding: "16px", borderRadius: "14px", background: "#d4af6a", color: "#000", fontWeight: "bold", fontSize: "18px", border: "none", cursor: "pointer" }}
+        >
+          {loading ? "جاري..." : "ادفع الآن - 249 ر.س 💳"}
+        </button>
+        <div style={{ marginTop: "16px", display: "flex", gap: "8px", justifyContent: "center" }}>
+          {["【entity-VISA¦canonical_name=VISA】", "STC Pay", "Apple Pay", "MADA"].map((m) => (
+            <span key={m} style={{ border: "1px solid #333", padding: "6px 10px", borderRadius: "8px", color: "#999", fontSize: "13px" }}>{m}</span>
+          ))}
         </div>
+        <p style={{ color: "#666", fontSize: "13px", marginTop: "16px" }}>
+          Tap - ALTIMASTOREKSA26 - 68090908 دفع آمن عبر
+          <br />بعد الدفع تحويل تلقائي لصفحة التحميل
+        </p>
       </div>
     </div>
   );
